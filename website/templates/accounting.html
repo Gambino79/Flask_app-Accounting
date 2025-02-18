@@ -1,0 +1,170 @@
+{% extends "base.html" %} {% block title %}Accounting{% endblock %}
+
+{%block content%}
+<head>
+    <style>
+        h3{
+            padding: 4px;
+        }
+        h2 {
+            padding: 4px;
+            text-align: center;  
+        }
+
+        table { 
+            margin-top: 15px;
+            border-collapse: collapse;
+            text-align: center;
+            width: 100%;
+            height: 100px;
+        }
+        
+        th, td {
+            border: 0.2em solid lightgray;
+            padding: 3px;
+            align: ceter;
+        }
+
+
+        th, td{
+            text-align: center;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #343a40;
+            color: white;
+        }
+
+        @media (min-width: 710px) { 
+            .table-left{
+                margin-bottom: 40px;
+                /*margin-right: 40px;*/
+                /*float: left;*/
+
+            }
+            .container .table-right{
+                margin-bottom: 40px;
+                /*float: left;*/
+
+            }
+            .tleft, .tright {
+                width: 100%;
+            }
+        }
+        /* Media query for small screens */ 
+        @media (max-width: 700px) { 
+
+            .table-left {
+                margin-top: 10px;
+                margin-bottom: 40px;
+                height: 300px;
+                overflow-y: auto;
+
+            }
+            .table-right{
+                height: 400px;
+                overflow-y: auto;
+
+            }
+            .tleft, .tright {
+                width: 100%;
+            }
+
+            #btn {
+                transform: scale(1)
+            }
+            
+
+            th {
+                position: sticky;
+                top: 0;
+                background-color: #343a40;
+            }
+
+            .tright, .tleft {
+                align: center;
+            }
+
+        }
+           
+    </style>
+</head>
+    <form method="POST">
+        <table align="center" class="tabledown" style="height:3em; width:35%;">
+            <tr>
+                <th style="background:white; color:black; border:none">Filter by month</th>
+                <td data-cell="Data Month filter" style="border:none"><input type="month" id="date_month_filter" name="date_month_filter"/>
+                <td style="border:none"><button type="submit"class="btn btn-primary" id="btn">Filter</button></td>
+            </tr>
+        </table>
+    </form>
+    <table>
+        <tr>
+            <th colspan="6" height="50"><h4 align="center">Revenues</h4></th>
+        </tr>
+        <tr>
+            <th height="50">Name</th>
+            <th height="50">Amount Revenue</th>
+            <th height="50">Date Received</th>
+            <th height="50">Period</th>
+            <th height="50">Modify</th>
+            <th height="50">Remove</th>
+        </tr>
+        {% for revenue in revenues%}
+        <tr>
+            <td> {{revenue.name}} </td>
+            <td> {{revenue.amount_revenue}} </td>
+            <td> {{revenue.date_received}} </td>
+            <td> {{revenue.date_month_re}} </td>
+            <td><a href="/revenues_update/{{revenue.id}}" class="btn btn-primary" id="btn">Update</a></td>
+            <td>
+                <form action="{{ url_for('views.delete_revenue_item', id=revenue.id) }}" method="POST">
+                    <button type="submit" class="btn btn-primary" id="btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table>
+        <tr>
+            <th colspan="8" height="50"><h4 align="center">Expenses</h4></th>
+        </tr>
+        <tr>
+            <th height="50">Company Name</th>
+            <th height="50">Amount Expense</th>
+            <th height="50">Paid Date</th>
+            <th height="50">Period</th>
+            <th height="50">Switch Paid(Y-N)</th>
+            <th height="50">Modify</th>
+            <th height="50">Remove</th>
+        </tr>
+        {% for expense in  expenses%}
+        <tr>
+            <td> {{expense.company_name}} </td>
+            <td> {{expense.amount_expense}} </td>
+            <td> {{expense.date_paid}} </td>
+            <td> {{expense.date_month_ex}} </td>
+            <td> {{expense.switch_paid}} </td>
+            <td><a href="/expenses_update/{{expense.id}}" class="btn btn-primary" id="btn">Update</a></td>
+            <td>
+                <form action="{{ url_for('views.delete_expense_item', id=expense.id) }}" method="POST">
+                    <button type="submit" class="btn btn-primary" id="btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div classe="Result">
+        <br />
+        <table>
+            <tr>
+                <th><h5>Available Amount for the month: {{date_month_filter}}{{date_today}}</h5></th>
+            </tr>
+            <tr>
+                <td><h5>{{Tot_amount_available}} EUR</5></td>
+            </tr>
+        </table>
+    </div>
+{%endblock%}

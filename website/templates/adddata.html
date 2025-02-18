@@ -1,0 +1,113 @@
+{% extends "base.html" %} {% block title %}adddata{% endblock %}
+
+{%block content%}
+<head>
+    <style>
+        .container {
+            width: 100%;
+        }
+        h4 {
+            padding: 5px;
+            color: black;
+        }
+
+        form {
+            background: #343a40 ;
+            color: white;
+            padding: 1em;
+            margin: 1.5em;
+
+        }
+
+        #btn {
+            background: white;
+            color:  #343a40 ;
+            border: none;
+            transform: scale(0.8);
+
+        }
+
+        /* Media query for small screens */ 
+        @media (max-width: 700px) { 
+            .container {
+                with:100%;
+            }
+
+            th {
+                display: none;
+            }
+            td {
+                padding: 0.2em;
+                display: grid;
+            }
+
+            form {
+                margin-right: 3em;
+                margin-left: 3em;
+            }
+
+            #btn {
+                transform: scale(1)
+            }
+
+            td::before{
+                content: attr(data-cell);
+                font-weight= 700;
+            }
+
+        }
+
+    </style>
+</head>
+<h4 align="center">ADD DATA</h4>
+<div class="table_up">
+    <form method="POST">
+        <table align="center" class="tbup">
+            <tr>
+                <th>Name</th>
+                <th>Amount Revenue</th>
+                <th>Date Received</th>
+            </tr>
+            <tr>
+                <td data-cell="Name"><input type="text" id="name" name="name" />
+                <td data-cell="Amount Revenue"><input type="num" id="amount_revenue" name="amount_revenue" />
+                <td data-cell="Date Received"><input type="date" id="date_received" name="date_received" />
+            </tr>
+        </table>
+        <br />
+        <table align="center" class="tabledown" style="height:3em; width:48%;">
+            <tr>
+                <th style="background:none; color:white; border:none">Add Year and Month</th>
+                <td data-cell="Data Month filter" style="border:none"><input type="month" id="date_month_filter" name="date_month_filter"/>
+                <td><button type="submit"class="btn btn-primary" id="btn">Add Revenu</button>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="table_down">
+    <form method="POST">
+        <table align="center" class="tbdown">
+            <tr>
+                <th>Company Name</th>
+                <th>Amount Expense</th>
+                <th>Paid Date</th>
+                <th>Switch Paid(Y-N)</th>
+            </tr>
+            <tr>
+                <td data-cell="Company Name"><input type="text" id="company_name" name="company_name" />
+                <td data-cell="Amount Expense"><input type="num" id="amount_expense" name="amount_expense" />
+                <td data-cell="Data Paid"><input type="date" id="date_paid" name="date_paid"/>
+                <td data-cell="Switch Paid Y/N"><input type="text" id="switch" name="switch" />
+            </tr>
+        </table>
+        </br>
+        <table align="center" class="tabledown" style="height:3em; width:48%;">
+            <tr>
+                <th style="background:none; color:white; border:none">Add Year and Month</th>
+                <td data-cell="Data Month filter" style="border:none"><input type="month" id="date_month_filter" name="date_month_filter"/>
+                <td><button type="submit"class="btn btn-primary" id="btn">Add Expense</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+{%endblock%}
