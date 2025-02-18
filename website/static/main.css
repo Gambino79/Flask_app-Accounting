@@ -1,0 +1,50 @@
+footer{
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  margin-top: 1em;
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  width:100%;
+}
+
+#page {
+
+  height: 13em;
+
+}
+
+#pwreset {
+  text-justify: none;
+  color: black;
+
+}
+
+#btn {
+  background: #343a40;
+  color: white;
+  border: none;
+  transform: scale(0.8);
+}
+
+#reset_password{
+  color: black;
+
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: lightgrey;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+@media (min-width: 710px) { 
+
+  #btn {
+    transform: scale(1)
+}
+}
